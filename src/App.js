@@ -2,7 +2,7 @@ import "./App.css";
 import { useEffect } from "react";
 import * as THREE from "three";
 import { ARButton } from "three/examples/jsm/webxr/ARButton";
-//import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 
 function App() {
   useEffect(() => {
@@ -32,26 +32,26 @@ function App() {
       const controller = renderer.xr.getController(0);
       scene.add(controller);
       controller.addEventListener('select', () => {
-        const materials = [
-          new THREE.MeshBasicMaterial({ color: 0xff0000 }),
-          new THREE.MeshBasicMaterial({ color: 0x00ff00 }),
-          new THREE.MeshBasicMaterial({ color: 0x0000ff }),
-          new THREE.MeshBasicMaterial({ color: 0xffff00 }),
-          new THREE.MeshBasicMaterial({ color: 0xff00ff }),
-          new THREE.MeshBasicMaterial({ color: 0x00ffff })
-        ];
-        const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-        const mesh = new THREE.Mesh(geometry, materials);
+        // const materials = [
+        //   new THREE.MeshBasicMaterial({ color: 0xff0000 }),
+        //   new THREE.MeshBasicMaterial({ color: 0x00ff00 }),
+        //   new THREE.MeshBasicMaterial({ color: 0x0000ff }),
+        //   new THREE.MeshBasicMaterial({ color: 0xffff00 }),
+        //   new THREE.MeshBasicMaterial({ color: 0xff00ff }),
+        //   new THREE.MeshBasicMaterial({ color: 0x00ffff })
+        // ];
+        // const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+        // const mesh = new THREE.Mesh(geometry, materials);
 
-        mesh.position.setFromMatrixPosition(reticle.matrix);
-        scene.add(mesh);
+        // mesh.position.setFromMatrixPosition(reticle.matrix);
+        // scene.add(mesh);
 
-        // const loader = new GLTFLoader();
-        // loader.load('/assets/SHOE_CABINET.gltf', (gltf) => {
-        //   const object = gltf.scene;
-        //   object.position.setFromMatrixPosition(reticle.matrix);
-        //   scene.add(object);
-        // })
+        const loader = new GLTFLoader();
+        loader.load('/assets/SHOE_CABINET.gltf', (gltf) => {
+          const object = gltf.scene;
+          object.position.setFromMatrixPosition(reticle.matrix);
+          scene.add(object);
+        })
       });
 
       renderer.xr.addEventListener("sessionstart", async (e) => {
